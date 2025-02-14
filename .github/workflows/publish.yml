@@ -1,0 +1,35 @@
+name: Publish Package
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
+
+      - run: pnpm install
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - run: pnpm build
+
+      # - run: npm publish --provenance --access public
+      - run: npm publish --access public
+        working-directory: ./dist
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
