@@ -1,10 +1,67 @@
 # gcp
 
+## Examples
+
+> ```plain
+> 📦Project Dir
+> ┣ 📂assets
+> ┃ ┣ 📂public
+> ┃ ┃ ┣ 📜.gitkeep
+> ┃ ┃ ┗ 📜logo.png
+> ┃ ┗ 📜index.html
+> ┣ 📂dist
+> ┗ 📜package.json
+> ```
+
+- `gcp "./assets/**/*" ./dist`
+
+  ```plain
+  📂dist
+  ┣ 📜index.html
+  ┗ 📜logo.png
+  ```
+
+- `gcp "./assets/**/*.png" ./dist`
+
+  ```plain
+  📂dist
+  ┗ 📜logo.png
+  ```
+
+- `gcp -B ./assets "./assets/**/*" ./dist`
+
+  ```plain
+  📂dist
+  ┣ 📂public
+  ┃ ┗ 📜logo.png
+  ┗ 📜index.html
+  ```
+
+- `gcp --dot -B ./assets "./assets/**/*" ./dist`
+
+  ```plain
+  📂dist
+  ┣ 📂public
+  ┃ ┣ 📜.gitkeep
+  ┃ ┗ 📜logo.png
+  ┗ 📜index.html
+  ```
+
+- `gcp -v -B ./ "./assets/**/*" ./dist`
+
+  ```plain
+  📂dist
+  ┗ 📂assets
+    ┣ 📂public
+    ┃  ┗ 📜logo.png
+    ┗ 📜index.html
+  ```
+
+## Usage
+
 ```plain
 Usage:
   gcp [options] [<pattern> [<pattern> ...]]
-
-Gcp v0.0.1
 
 Expand the positional glob expression arguments into any matching file system
 paths found, then copy to dest dir.
@@ -91,6 +148,7 @@ paths found, then copy to dest dir.
                          Can be set multiple times
   -B<base> --base=<base> remove base to the resulte
                          Can be set multiple times
+
   -v --debug             Output a huge amount of noisy debug information about
                          patterns as they are parsed and used to match files.
 
