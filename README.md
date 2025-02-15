@@ -1,5 +1,9 @@
 # gcp
 
+[![npm version](https://img.shields.io/npm/v/@s4p/gcp.svg)](https://www.npmjs.com/package/@s4p/gcp)
+
+Copy file globs
+
 ## Examples
 
 > ```plain
