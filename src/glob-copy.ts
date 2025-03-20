@@ -65,4 +65,4 @@ async function globCopy(positionals: string[], options: GcpOptions) {
   );
 }
 
-export { globCopy };
+export { type GcpOptions, globCopy };

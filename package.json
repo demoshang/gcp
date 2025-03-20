@@ -1,7 +1,7 @@
 {
   "name": "@s4p/gcp",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "glob copy file",
   "author": "SHANG",
   "license": "MIT",
@@ -25,7 +25,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.cts",
   "bin": {
-    "gcp": "./dist/index.cjs"
+    "gcp": "./dist/bin.cjs"
   },
   "files": [
     "dist"
@@ -34,13 +34,13 @@
     "build": "pnpm run clean && concurrently pnpm:build:*",
     "build:bundle": "pnpm run bundle --sourcemap",
     "build:copy": "cpx README.md dist/ && cat package.json | jq '{name,type,version,description,homepage,repository,exports,main,types,bin,dependencies,keywords,module:.module} | walk(if type == \"string\" and contains(\"./dist/\") then gsub(\"./dist/\"; \"./\") else . end)' > dist/package.json",
-    "bundle": "tsup src/index.ts --treeshake --shims --format esm,cjs --dts",
+    "bundle": "tsup src/index.ts src/bin.ts --treeshake --shims --format esm,cjs --dts",
     "clean": "rimraf dist",
     "dev": "pnpm run clean && pnpm run bundle --sourcemap=inline --watch",
     "lint": "concurrently pnpm:lint:*",
     "lint:fix": "eslint ./src --fix",
     "lint:tsc": "tsc --noEmit",
-    "start": "cross-env node --import @swc-node/register/esm-register src/index.ts"
+    "start": "cross-env node --import @swc-node/register/esm-register src/bin.ts"
   },
   "dependencies": {
     "debug": "^4.4.0",
